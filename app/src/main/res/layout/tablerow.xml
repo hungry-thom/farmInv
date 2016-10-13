@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="wrap_content"
+	android:layout_width="wrap_content">
+
+	<EditText
+		android:id="@+id/editDate"
+		android:inputType="date"
+		android:ems="10"
+		android:width="120dp"
+		android:focusable="false"
+		android:text="dd/mmm/yy"/>
+
+	<Spinner
+		android:id="@+id/spinnerGroup"
+		android:entries="@array/groups"/>
+
+	<EditText
+		android:id="@+id/editBatch"
+		android:inputType="number"
+		android:ems="10"
+		android:width="60dp"
+		android:text="000"/>
+
+	<Spinner
+		android:id="@+id/spinnerAction"/>
+
+	<EditText
+		android:id="@+id/editCount"
+		android:inputType="number"
+		android:ems="10"
+		android:width="60dp"
+		android:text="count"/>
+
+	<EditText
+		android:id="@+id/editLbs"
+		android:inputType="number"
+		android:ems="10"
+		android:width="60dp"
+		android:text="lbs"/>
+
+	<TextView
+		android:id="@+id/textCost"
+		android:ems="10"
+		android:width="60dp"
+		android:text="cost"/>
+
+	<TextView
+		android:id="@+id/textCOGS"
+		android:ems="10"
+		android:width="60dp"
+		android:text="COGS"/>
+
+	<TextView
+		android:id="@+id/textCost"
+		android:ems="10"
+		android:width="60dp"
+		android:text="cost"/>
+
+	<TextView
+		android:id="@+id/textPricePer"
+		android:ems="10"
+		android:width="60dp"
+		android:text="priceper"/>
+
+	<TextView
+		android:id="@+id/textSale"
+		android:ems="10"
+		android:width="60dp"
+		android:text="sale"/>
+
+</TableRow>
+
+

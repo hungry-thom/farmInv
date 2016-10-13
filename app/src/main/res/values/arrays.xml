@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="groups">
+    <item>Broiler</item>
+    <item>Layer</item>
+    <item>Rabbit</item>
+    <item>Duck</item>
+    <item>Pork</item>
+   	</string-array>
+
+</resources>
