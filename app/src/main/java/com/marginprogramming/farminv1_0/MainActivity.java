@@ -33,17 +33,17 @@ public class MainActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        inflateTableRow();
+        //inflateTableRow();
 
         final Button buttonAdd = (Button) findViewById( R.id.buttonAdd);
         //buttonAdd = (Button) findViewById( R.id.buttonAdd);
         buttonAdd.setOnClickListener(this);
 
-        //eDate = (EditText)findViewById(R.id.editDate);
-        //eDate.setOnClickListener(this);
+        eDate = (EditText)findViewById(R.id.editDate);
+        eDate.setOnClickListener(this);
 
     }
-
+    /* //
     public void getDatePicker(final EditText et){
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
-
+*/
     public void inflateTableRow(){
         final TableLayout tl = (TableLayout) findViewById(R.id.tableEntry);
         final TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.tablerow, null);
@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements View.OnClickListener
         tempDateID.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDatePicker(tempDateID);
+                //getDatePicker(tempDateID);
                    
             }
         });
@@ -93,7 +93,7 @@ public class MainActivity extends Activity implements View.OnClickListener
     			//Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_SHORT).show(); 
                 inflateTableRow();
     			break; 
-            /*
+            
     		case R.id.editDate:
                 // Get Current Date
                 final Calendar c = Calendar.getInstance();
@@ -115,7 +115,7 @@ public class MainActivity extends Activity implements View.OnClickListener
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();  
     			break; 
-            */
+            
     	}
     }
 
