@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements View.OnClickListener
         mDbHelper = new dbFarmAdapter(getApplicationContext());
         mDbHelper.createDatabase();
 
-        inflateTableRow();
+        summaryView();
         inflateEntryRow();
 
         //final Button buttonAdd = (Button) findViewById( R.id.buttonAdd);
@@ -94,52 +94,56 @@ public class MainActivity extends Activity implements View.OnClickListener
         tlayout.addView(entryRow);
     }
 
-    public void inflateTableRow(){
+    public void summaryView(){
         //dbFarmAdapter mDbHelper = new dbFarmAdapter(getApplicationContext());
         mDbHelper.open();
-
-        final TableLayout tlayout = (TableLayout) findViewById(R.id.tableEntry);
-        final TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.tablerow, null);
-
-        int textViewCount = 11;
 
         Cursor querySummary = mDbHelper.getSummary();
         
         do{
-            TextView[] tempRow = new TextView[textViewCount];
-
-            tempRow[0] = (TextView) tableRow.findViewById(R.id.textDate);
-            tempRow[1] = (TextView) tableRow.findViewById(R.id.textGroup);
-            tempRow[2] = (TextView) tableRow.findViewById(R.id.textBatch);
-            tempRow[3] = (TextView) tableRow.findViewById(R.id.textAction);
-            tempRow[4] = (TextView) tableRow.findViewById(R.id.textNumber);
-            tempRow[5] = (TextView) tableRow.findViewById(R.id.textLbs);
-            tempRow[6] = (TextView) tableRow.findViewById(R.id.textCost);
-            tempRow[7] = (TextView) tableRow.findViewById(R.id.textCOGS);
-            tempRow[8] = (TextView) tableRow.findViewById(R.id.textPricePer);
-            tempRow[9] = (TextView) tableRow.findViewById(R.id.textSale);
-            tempRow[10] = (TextView) tableRow.findViewById(R.id.textAge);
-            //Not sure if each record will display on new row. unique id may be required
-            //tempDateID.setId(vID);
-            //vID++;
-            for (int i=0; i<querySummary.getColumnCount(); i++) {
-              String var1 = querySummary.getString(i);
-              tempRow[i].setText(var1);
-              
-            }
-
-            tempRow[3].setText("Summary");
-            
-            //Add row to the table
-            if(tableRow.getParent()!=null){
-                ((ViewGroup)tableRow.getParent()).removeView(tableRow);
-            }
-            tlayout.addView(tableRow);    
+            inflateTableRow(querySummary);    
         }while(querySummary.moveToNext());
 
         querySummary.close();
         mDbHelper.close();
     }
+
+    public void inflateTableRow(Cursor c){
+
+        TableLayout tlayout = (TableLayout) findViewById(R.id.tableEntry);
+        TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.tablerow, null);
+
+        int textViewCount = 11;
+
+        TextView[] tempRow = new TextView[textViewCount];
+
+        tempRow[0] = (TextView) tableRow.findViewById(R.id.textDate);
+        tempRow[1] = (TextView) tableRow.findViewById(R.id.textGroup);
+        tempRow[2] = (TextView) tableRow.findViewById(R.id.textBatch);
+        tempRow[3] = (TextView) tableRow.findViewById(R.id.textAction);
+        tempRow[4] = (TextView) tableRow.findViewById(R.id.textNumber);
+        tempRow[5] = (TextView) tableRow.findViewById(R.id.textLbs);
+        tempRow[6] = (TextView) tableRow.findViewById(R.id.textCost);
+        tempRow[7] = (TextView) tableRow.findViewById(R.id.textCOGS);
+        tempRow[8] = (TextView) tableRow.findViewById(R.id.textPricePer);
+        tempRow[9] = (TextView) tableRow.findViewById(R.id.textSale);
+        tempRow[10] = (TextView) tableRow.findViewById(R.id.textAge);
+        
+        
+            
+        //Not sure if each record will display on new row. unique id may be required
+        //tempDateID.setId(vID);
+        //vID++;
+        for (int i=0; i<c.getColumnCount(); i++) {
+            //tempRow[i].setId(View.generateViewId());
+            String var1 = c.getString(i);
+            tempRow[i].setText(var1);
+        }
+
+        tempRow[3].setText("Summary");
+        tlayout.addView(tableRow);  
+    }    
+            
 
     @Override public void onClick( View view) 
     {
