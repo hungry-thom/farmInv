@@ -4,31 +4,39 @@
 	android:layout_height="wrap_content"
 	android:layout_width="wrap_content">
 
-	<TextView
-		android:id="@+id/textDate"
+	<EditText
+		android:id="@+id/editDate"
+		android:inputType="date"
 		android:ems="10"
-		android:width="120dp" />
+		android:width="120dp"
+		android:focusable="false"
+		android:text="dd/mmm/yy"/>
 
-	<TextView
-		android:id="@+id/textGroup" />
+	<Spinner
+		android:id="@+id/spinnerGroup"
+		android:entries="@array/groups"/>
 
-	<TextView
-		android:id="@+id/textBatch"
+	<EditText
+		android:id="@+id/editBatch"
+		android:inputType="number"
 		android:ems="10"
-		android:width="60dp" />
+		android:width="60dp"
+		android:imeOptions="flagNoExtractUi"
+		android:text="000"/>
 
-	<TextView
-		android:id="@+id/textAction"/>
+	<Spinner
+		android:id="@+id/spinnerAction"/>
 
-	<TextView
-		android:id="@+id/textNumber"
+	<EditText
+		android:id="@+id/editNumber"
+		android:inputType="number"
 		android:ems="10"
 		android:width="60dp"
 		android:imeOptions="flagNoExtractUi"
 		android:text="count"/>
 
-	<TextView
-		android:id="@+id/textLbs"
+	<EditText
+		android:id="@+id/editLbs"
 		android:inputType="number"
 		android:ems="10"
 		android:width="60dp"
@@ -48,6 +56,12 @@
 		android:text="COGS"/>
 
 	<TextView
+		android:id="@+id/textCost"
+		android:ems="10"
+		android:width="60dp"
+		android:text="cost"/>
+
+	<TextView
 		android:id="@+id/textPricePer"
 		android:ems="10"
 		android:width="60dp"
@@ -63,7 +77,7 @@
 		android:id="@+id/textAge"
 		android:ems="10"
 		android:width="60dp"
-		android:text="age"/>	
+		android:text="age"/>
 
 </TableRow>
 

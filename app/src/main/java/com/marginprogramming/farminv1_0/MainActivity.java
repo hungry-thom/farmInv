@@ -9,20 +9,25 @@ import android.widget.Toast;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.view.View.OnClickListener;
 import android.content.res.Resources;
 
 import java.util.Calendar;
+import android.database.SQLException;
+import android.database.Cursor;
+import android.database.sqlite.*;
 
 public class MainActivity extends Activity implements View.OnClickListener
 {
+    dbFarmAdapter mDbHelper;
     EditText eDate;
     private int mYear, mMonth, mDay, mHour, mMinute;
     int vID=1;
@@ -33,17 +38,21 @@ public class MainActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        //inflateTableRow();
+        mDbHelper = new dbFarmAdapter(getApplicationContext());
+        mDbHelper.createDatabase();
 
-        final Button buttonAdd = (Button) findViewById( R.id.buttonAdd);
+        inflateTableRow();
+        inflateEntryRow();
+
+        //final Button buttonAdd = (Button) findViewById( R.id.buttonAdd);
         //buttonAdd = (Button) findViewById( R.id.buttonAdd);
-        buttonAdd.setOnClickListener(this);
+        //buttonAdd.setOnClickListener(this);
 
-        eDate = (EditText)findViewById(R.id.editDate);
-        eDate.setOnClickListener(this);
+        //eDate = (EditText)findViewById(R.id.editDate);
+        //eDate.setOnClickListener(this);
 
     }
-    /* //
+     //
     public void getDatePicker(final EditText et){
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -64,36 +73,83 @@ public class MainActivity extends Activity implements View.OnClickListener
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
-*/
-    public void inflateTableRow(){
-        final TableLayout tl = (TableLayout) findViewById(R.id.tableEntry);
-        final TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.tablerow, null);
 
-        final EditText tempDateID = (EditText) tableRow.findViewById(R.id.editDate);
+    public void inflateEntryRow(){
+        final TableLayout tlayout = (TableLayout) findViewById(R.id.tableEntry);
+        final TableRow entryRow = (TableRow) getLayoutInflater().inflate(R.layout.entryrow, null);
+
+        final EditText tempDateID = (EditText) entryRow.findViewById(R.id.editDate);
         tempDateID.setId(View.generateViewId());
         //tempDateID.setId(vID);
         //vID++;
         tempDateID.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //getDatePicker(tempDateID);
+                getDatePicker(tempDateID);
                    
             }
         });
 
         //Add row to the table
-        tl.addView(tableRow);
+        tlayout.addView(entryRow);
+    }
+
+    public void inflateTableRow(){
+        //dbFarmAdapter mDbHelper = new dbFarmAdapter(getApplicationContext());
+        mDbHelper.open();
+
+        final TableLayout tlayout = (TableLayout) findViewById(R.id.tableEntry);
+        final TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.tablerow, null);
+
+        int textViewCount = 11;
+
+        Cursor querySummary = mDbHelper.getSummary();
+        
+        do{
+            TextView[] tempRow = new TextView[textViewCount];
+
+            tempRow[0] = (TextView) tableRow.findViewById(R.id.textDate);
+            tempRow[1] = (TextView) tableRow.findViewById(R.id.textGroup);
+            tempRow[2] = (TextView) tableRow.findViewById(R.id.textBatch);
+            tempRow[3] = (TextView) tableRow.findViewById(R.id.textAction);
+            tempRow[4] = (TextView) tableRow.findViewById(R.id.textNumber);
+            tempRow[5] = (TextView) tableRow.findViewById(R.id.textLbs);
+            tempRow[6] = (TextView) tableRow.findViewById(R.id.textCost);
+            tempRow[7] = (TextView) tableRow.findViewById(R.id.textCOGS);
+            tempRow[8] = (TextView) tableRow.findViewById(R.id.textPricePer);
+            tempRow[9] = (TextView) tableRow.findViewById(R.id.textSale);
+            tempRow[10] = (TextView) tableRow.findViewById(R.id.textAge);
+            //Not sure if each record will display on new row. unique id may be required
+            //tempDateID.setId(vID);
+            //vID++;
+            for (int i=0; i<querySummary.getColumnCount(); i++) {
+              String var1 = querySummary.getString(i);
+              tempRow[i].setText(var1);
+              
+            }
+
+            tempRow[3].setText("Summary");
+            
+            //Add row to the table
+            if(tableRow.getParent()!=null){
+                ((ViewGroup)tableRow.getParent()).removeView(tableRow);
+            }
+            tlayout.addView(tableRow);    
+        }while(querySummary.moveToNext());
+
+        querySummary.close();
+        mDbHelper.close();
     }
 
     @Override public void onClick( View view) 
     {
     	switch (view.getId()) {
-
+            /*
     		case R.id.buttonAdd: 
     			//Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_SHORT).show(); 
                 inflateTableRow();
     			break; 
-            
+            */
     		case R.id.editDate:
                 // Get Current Date
                 final Calendar c = Calendar.getInstance();

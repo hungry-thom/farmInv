@@ -8,17 +8,79 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignParentLeft="true" 
-		android:layout_alignParentBottom="true" >
+		android:layout_alignParentTop="true" >
 
 		<TableLayout
 			android:id="@+id/tableEntry"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content">
 
-			
 			<TableRow
+				android="@+id/rowEntryHeading"
 				android:layout_height="wrap_content"
-				android:layout_width="wrap_content">
+				android:layout_width="wrap_content"
+				android:gravity="center_horizontal">
+
+				<TextView
+					android:ems="10"
+					android:width="120dp"
+					android:text="date"/>
+
+				<TextView
+					android:text="group"/>
+
+				<TextView
+					android:ems="10"
+					android:width="60dp"
+					android:text="batch"/>
+
+				<TextView
+					text="action"/>
+
+				<TextView
+					android:ems="10"
+					android:width="60dp"
+					android:text="count"/>
+
+				<TextView
+					android:ems="10"
+					android:width="60dp"
+					android:text="lbs"/>
+
+				<TextView
+					android:ems="10"
+					android:width="60dp"
+					android:text="cost"/>
+
+				<TextView
+					android:ems="10"
+					android:width="60dp"
+					android:text="COGS"/>
+
+				<TextView
+					android:ems="10"
+					android:width="60dp"
+					android:text="cost"/>
+
+				<TextView
+					android:ems="10"
+					android:width="60dp"
+					android:text="priceper"/>
+
+				<TextView
+					android:ems="10"
+					android:width="60dp"
+					android:text="sale"/>
+
+			</TableRow>
+
+			<!--
+			<TableRow
+				android:id="@+id/rowEditEntry"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_alignParentLeft="true" 
+				android:layout_alignParentBottom="true">
 
 				<EditText
 					android:id="@+id/editDate"
@@ -87,74 +149,19 @@
 					android:text="sale"/>
 
 			</TableRow>
+		-->
 			
-			<TableRow
-				android:layout_height="wrap_content"
-				android:layout_width="wrap_content"
-				android:gravity="center_horizontal">
-
-				<TextView
-					android:ems="10"
-					android:width="120dp"
-					android:text="date"/>
-
-				<TextView
-					android:text="group"/>
-
-				<TextView
-					android:ems="10"
-					android:width="60dp"
-					android:text="batch"/>
-
-				<TextView
-					text="action"/>
-
-				<TextView
-					android:ems="10"
-					android:width="60dp"
-					android:text="count"/>
-
-				<TextView
-					android:ems="10"
-					android:width="60dp"
-					android:text="lbs"/>
-
-				<TextView
-					android:ems="10"
-					android:width="60dp"
-					android:text="cost"/>
-
-				<TextView
-					android:ems="10"
-					android:width="60dp"
-					android:text="COGS"/>
-
-				<TextView
-					android:ems="10"
-					android:width="60dp"
-					android:text="cost"/>
-
-				<TextView
-					android:ems="10"
-					android:width="60dp"
-					android:text="priceper"/>
-
-				<TextView
-					android:ems="10"
-					android:width="60dp"
-					android:text="sale"/>
-
-			</TableRow>
+			
 			
 		</TableLayout>
 
 	</HorizontalScrollView>
-
+	<!--
 	<Button
 		android:id="@+id/buttonAdd"
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:text="add entry"/>
-
+	-->
 </RelativeLayout>
 
